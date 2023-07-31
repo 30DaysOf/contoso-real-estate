@@ -160,6 +160,8 @@ The process has been validated for Azure Static Web Apps and GitHub Pages option
  2.  [Deploy manually with `yarn deploy`](https://docusaurus.io/docs/deployment#deploy)
  3. [Automate build/deploy with GitHub Actions](https://docusaurus.io/docs/deployment#triggering-deployment-with-github-actions)
 
+ _Note:_ Since the `website` folder is within the `packages/docs` directory make sure the GitHub Actions workflow is configured to take the working directory into account
+
 
 ## Troubleshooting
 
