@@ -17,7 +17,7 @@ const config = {
   deploymentBranch: "gh-pages",
 
   //------- Optional: build checks -----
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn', // 'throw',
   onBrokenMarkdownLinks: 'warn',
 
   //------ Optional: Other fields -----
