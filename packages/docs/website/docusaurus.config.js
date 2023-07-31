@@ -9,7 +9,7 @@ const config = {
   // ------- Required Fields -------
   title: 'Contoso Real Estate: Developer Guide',
   url: 'https://30daysof.github.io',
-  baseUrl: '/contoso-real-estate/',  // set this to '/contoso-real-estate/' for GitHub pages deployment
+  baseUrl: '/contoso-real-estate/',  
 
   // ------- Optional: deploy related -------
   organizationName: '30daysof',  // needed only for GitHub Pages deployment
