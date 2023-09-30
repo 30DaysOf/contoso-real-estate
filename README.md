@@ -19,6 +19,10 @@ You can navigate through the documentation using the table of contents below:
     - [DevOps](#devops)
     - [Developer tools](#developer-tools)
   - [Development environment](#development-environment)
+  - [Developer Guide (Website)](#developer-guide-website)
+    - [1 | Preview Website](#1--preview-website)
+    - [2 | Deploy Website](#2--deploy-website)
+    - [3 | Test Website](#3--test-website)
   - [Usage costs](#usage-costs)
   - [Project structure](#project-structure)
   - [Deploy to Azure](#deploy-to-azure)
@@ -72,7 +76,7 @@ flowchart TD
     Storage([Azure Blob Storage - CMS])
     end 
 
-    Portal --> SWA_Angular -- "portal.contoso.com/api/**" --> APIM -- "portal.contoso.com/api/**" --> Functions
+    Portal --> SWA_Angular -- "portal.contoso.com/api/**" --> Functions
     
     Blog -- "blog.contoso.com" --> ACA_Next -. "Strapi API" .-> ACA_Strapi
     
@@ -82,7 +86,7 @@ flowchart TD
     
     API --> APIM -- "api.contoso.com" --> Functions <-- "read/write" --> DB_Mongo
 
-    Stripe ---> APIM -- "stripe.contoso.com" --> ACA_Stripe <-. "validate payment (through APIM)" .-> Functions
+    Stripe ---> APIM -- "stripe.contoso.com" --> ACA_Stripe <-. "validate payment (through APIM -optional-)" .-> Functions
     
     %% Portal
     linkStyle 0 stroke:pink
@@ -126,6 +130,8 @@ flowchart TD
 - [Azure Container Apps](https://azure.microsoft.com/services/container-apps/) - The hosting of the Blog, Stripe and Strapi APIs.
 - [Azure Application Insights](https://azure.microsoft.com/services/monitor/) - Monitoring and accessing logs for the applications and APIs.
 
+In order use [API Management](https://azure.microsoft.com/products/api-management), please set the boolean flag `useAPIM` on [the main bicep file](./infra/main.bicep) to true. This will provision the API Management instance and configure the APIs to use it. Please note that this will incur additional costs and the provisioning process may take up to 40 minutes.
+
 ### DevOps
 
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) - Provisioning, managing and deploying the application to Azure.
@@ -163,7 +169,7 @@ This project is optimized for use with [GitHub Codespaces](https://github.com/fe
 The project has a  [Developer Guide](./packages/docs/website/README.md) defined under `packages/docs` and implemented as an interactive website using the [Docusaurus](https://docusaurus.io) platform.
 ### 1 | Preview Website 
 
- - Read the [website/README](./packages/docs/website/README.md) more details on setting up and building this package. 
+ - Read the [website/README](./packages/docs/website/README.md) for more details on setting up and building this package. 
  - Use the following instructions for a quickstart.
 
 ```bash
@@ -245,6 +251,7 @@ This project uses [Azure Developer CLI (`azd`)](https://aka.ms/azd) to provision
 
 ```bash
 # Login to azd. Only required once per install.
+# If the command fails, try using the --use-device-code flag
 azd auth login
 
 # Provision infrastructure and the azd development environment
@@ -253,6 +260,8 @@ azd provision
 # Package the app using the environment variables in .azure/env + deploy the code on Azure
 azd deploy
 ```
+
+>The `--use-device-code` is used to log in by using a device code instead of a browser, this may resolve any browser issues while logging in. For more information on when & why to use flags, check [here](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference#azd-auth-login)
 
 > If you encounter issues with the Azure Developer CLI, please open an issue [here](https://github.com/Azure/azure-dev/issues/new/choose).
 
